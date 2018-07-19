@@ -13,10 +13,10 @@ var $grid = $('.grid').isotope({
 
 });
 
-var $quicksearch = $('.quicksearch').keyup( debounce ( function() {
+var $quicksearch = $('.quicksearch').keyup( function() {
   qsRegex = new RegExp ( $quicksearch.val(), 'gi');
   $grid.isotope();
-}, 200 ) );
+}, 200 );
 
 $(window).load(function(){
     
