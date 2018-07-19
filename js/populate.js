@@ -2,35 +2,55 @@
 var qsRegex;
 
 var $grid = $('.grid').isotope({
-  itemSelector: '.grid-item',
-  masonry: {
-    columnWidth: 80
-  },
+  itemSelector: '.tile-item',
+  masonry: {columnWidth: 80},
 
   filter: function() {
-    return qsRegex ? $(this).text().match( qsRegex ) : true;
+    return qsRegex ? $(this).find('.industry').text().match( qsRegex ) : true;
   }
 
 });
 
-var $quicksearch = $('.quicksearch').keyup( function() {
-  qsRegex = new RegExp ( $quicksearch.val(), 'gi');
+// use value of search field to filter
+var $quicksearch = $('.quicksearch').keyup( debounce( function() {
+  qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+  //window.alert('val: ' + $quicksearch.val());
   $grid.isotope();
-}, 200 );
+}, 200 ) );
 
-$(window).load(function(){
-    
-  // Loop through and create new items
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+  var timeout;
+  threshold = threshold || 100;
+  return function debounced() {
+    clearTimeout( timeout );
+    var args = arguments;
+    var _this = this;
+    function delayed() {
+      fn.apply( _this, args );
+    }
+    timeout = setTimeout( delayed, threshold );
+  };
+}
+
+$(window).load( function(){
+
+    // window.alert('window loaded')
+
+    // Loop through and create new items
     for(i = 0; i < bea.length; i++){
-        
+
           //
-          var $items = "<div class='grid-item grid-item--width3 grid-item--height2'><h3>" + bea[i].industry +"</h3>"+
-        "<p>GDP Growth:</p>"+bea[i].gdp_growth+"</div>";
-        
+          var $items = $("<div class= 'tile-item'> <h3 class= industry> " + bea[i].industry
+           + " </h3>" + "<p>GDP Growth:</p>" + "<p>" + bea[i].gdp_growth + "</p></div>");
+
           // append elements to container
           $grid.append( $items )
-            // add and lay out newly appended elements
-            .isotope( 'appended', $items );
+
+          // add and lay out newly appended elements
+          .isotope( 'appended', $items);
     }
+
+  //  .isotope( 'reLayout', callback )
 
 });
