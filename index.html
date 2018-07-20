@@ -21,16 +21,20 @@
     <h1>~~~Viz</h1>
 
     <!--SEARCH BAR-->
-    <p><input type="text" class="quicksearch" placeholder="Search"/></p>
+    <p>
+        <input id="search" type="text" class="quicksearch" placeholder="Search"/>
+    </p>
+
+    <!--FILTER BUTTONS HERE-->
+    <div id="viz">
+      <button id="geography" onClick="choose('geography')">geography</button>
+      <button id="industry" onClick="choose('industry')">industry</button>
+      <div id="result"></div>
+    </div>
 
     <!--GRID GOES HERE-->
         <div class="grid">
-          <!--
-          <div class= "tile-item">
-            <h3 class= "industry"> Construction </h3>
-            <p> 99.99 </p>
-          </div>
-          -->
+
         </div>
 
     <script type="text/javascript" src="js/populate.js"></script>

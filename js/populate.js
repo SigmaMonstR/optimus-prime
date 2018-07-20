@@ -1,4 +1,20 @@
 // external js: isotope.pkgd.js
+
+var feature = 'industry'
+function choose(choice){
+    feature = choice; //console.log(feature);
+    if (feature == 'industry') {
+      document.getElementById("industry").style.background='#6EA7F5'
+      document.getElementById("geography").style.background='#FFFFFF'
+    }
+    else {
+      document.getElementById("geography").style.background='#6EA7F5'
+      document.getElementById("industry").style.background='#FFFFFF'
+    }
+    document.getElementById("search").value = "";
+    document.getElementById("search").focus();
+}
+
 var qsRegex;
 
 var $grid = $('.grid').isotope({
@@ -6,7 +22,12 @@ var $grid = $('.grid').isotope({
   masonry: {columnWidth: 80},
 
   filter: function() {
-    return qsRegex ? $(this).find('.industry').text().match( qsRegex ) : true;
+    if (feature == 'industry') {
+      return qsRegex ? $(this).find('.industry').text().match( qsRegex ) : true;
+    }
+    else if (feature == 'geography') {
+      return qsRegex ? $(this).find('.geography').text().match( qsRegex ) : true;
+    }
   }
 
 });
@@ -41,8 +62,11 @@ $(window).load( function(){
     for(i = 0; i < bea.length; i++){
 
           //
-          var $items = $("<div class= 'tile-item'> <h3 class= industry> " + bea[i].industry
-           + " </h3>" + "<p>GDP Growth:</p>" + "<p>" + bea[i].gdp_growth + "</p></div>");
+          var $items = $( "<div class= 'tile-item'>" +
+                            "<h4 class= geography> " + bea[i].geography + " </h4>" +
+                            "<h2 class= industry> " + bea[i].industry + " </h2>" +
+                            "<p>GDP Growth: " + bea[i].gdp_growth + "</p>" +
+                          "</div>");
 
           // append elements to container
           $grid.append( $items )
@@ -51,6 +75,6 @@ $(window).load( function(){
           .isotope( 'appended', $items);
     }
 
-  //  .isotope( 'reLayout', callback )
+  document.getElementById("search").focus();
 
 });
