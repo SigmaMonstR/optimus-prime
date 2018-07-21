@@ -27,5 +27,19 @@ body { font-family: sans-serif; }
   border-color: hsla(0, 0%, 0%, 0.7);
 }
 
-button { font-size: 14px;
-          margin-bottom: 15px}
+input {
+  display: inline-block;
+  width: 6em;
+  position: relative;
+  top: -3em;
+}
+
+label {
+  font-size: 10px;
+  display: inline-block;
+  width: 6em;
+  margin-right: .5em;
+  padding-top: 1.5em;
+}
+
+button { font-size: 14px; }

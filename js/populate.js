@@ -1,6 +1,6 @@
 // external js: isotope.pkgd.js
 
-var feature = 'industry'
+/*var feature = 'industry'
 document.getElementById("industry").style.background='#6EA7F5'
 
 function choose(choice){
@@ -15,28 +15,32 @@ function choose(choice){
     }
     document.getElementById("search").value = "";
     document.getElementById("search").focus();
-}
+}*/
 
-var qsRegex;
+var indRegex;
+var geoRegex;
 
 var $grid = $('.grid').isotope({
   itemSelector: '.tile-item',
   masonry: {columnWidth: 80},
 
   filter: function() {
-    if (feature == 'industry') {
-      return qsRegex ? $(this).find('.industry').text().match( qsRegex ) : true;
-    }
-    else if (feature == 'geography') {
-      return qsRegex ? $(this).find('.geography').text().match( qsRegex ) : true;
-    }
+    ind = indRegex ? $(this).find('.industry').text().match( indRegex ) : true;
+    geo = geoRegex ? $(this).find('.geography').text().match( geoRegex ) : true;
+    return ind && geo
   }
 
 });
 
 // use value of search field to filter
-var $quicksearch = $('.quicksearch').keyup( debounce( function() {
-  qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+var $indSearch = $('.indSearch').keyup( debounce( function() {
+  indRegex = new RegExp( $indSearch.val(), 'gi' );
+  //window.alert('val: ' + $quicksearch.val());
+  $grid.isotope();
+}, 200 ) );
+
+var $geoSearch = $('.geoSearch').keyup( debounce( function() {
+  geoRegex = new RegExp( $geoSearch.val(), 'gi' );
   //window.alert('val: ' + $quicksearch.val());
   $grid.isotope();
 }, 200 ) );
@@ -77,6 +81,6 @@ $(window).load( function(){
           .isotope( 'appended', $items);
     }
 
-    document.getElementById("search").focus();
+    document.getElementById("indSearch").focus();
 
 });
