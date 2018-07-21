@@ -1,6 +1,8 @@
 // external js: isotope.pkgd.js
 
 var feature = 'industry'
+document.getElementById("industry").style.background='#6EA7F5'
+
 function choose(choice){
     feature = choice; //console.log(feature);
     if (feature == 'industry') {
@@ -75,6 +77,6 @@ $(window).load( function(){
           .isotope( 'appended', $items);
     }
 
-  document.getElementById("search").focus();
+    document.getElementById("search").focus();
 
 });

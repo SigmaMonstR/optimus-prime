@@ -5,7 +5,7 @@ body { font-family: sans-serif; }
 /* ---- grid ---- */
 
 .grid {
-  background: #DDD;
+  background: #FFFFFF; //#DDD;
   max-width: 1200px;
 }
 
@@ -27,4 +27,5 @@ body { font-family: sans-serif; }
   border-color: hsla(0, 0%, 0%, 0.7);
 }
 
-button { font-size: 14px; }
+button { font-size: 14px;
+          margin-bottom: 15px}
